@@ -1,1 +1,23 @@
 
+library(tidyverse)
+library(tidytext)
+
+# Sets it to the correct working directory for me.
+setwd("C:/Users/Fabienne/Documents/Big Data Analytics")
+
+# Reads in the files that are not the transcripts
+features <- read_csv("YouTube-Personality-audiovisual_features.csv")
+gender <- read_csv("YouTube-Personality-gender.csv")
+impression_scores <- read_csv("YouTube-Personality-Personality_impression_scores_train.csv")
+
+
+# Makes the vlogId that can be used in the tibble.
+transcript_files <- dir(path = "C:/Users/Fabienne/Documents/Big Data Analytics/transcripts")
+vlogId = basename(transcript_files)
+vlogId = str_replace(vlogId, pattern = ".txt$", replacement = "")
+
+#Sets the working directory for me to read in the transcripts
+setwd("C:/Users/Fabienne/Documents/Big Data Analytics/transcripts")
+
+# Makes a tibble with the vlogId, the transcript and the filename. 
+transcripts_df = tibble(Id=vlogId, Text = map_chr(transcript_files, ~ paste(readLines(.x), collapse = "\\n")), filename = transcript_files)
