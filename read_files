@@ -21,3 +21,6 @@ setwd("C:/Users/Fabienne/Documents/Big Data Analytics/transcripts")
 
 # Makes a tibble with the vlogId, the transcript and the filename. 
 transcripts_df = tibble(Id=vlogId, Text = map_chr(transcript_files, ~ paste(readLines(.x), collapse = "\\n")), filename = transcript_files)
+
+#test
+1+2
